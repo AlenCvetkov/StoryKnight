@@ -1,0 +1,128 @@
+[gd_scene format=3 uid="uid://b7pwvahne041y"]
+
+[ext_resource type="Script" uid="uid://cee6aqan1ibe0" path="res://enemy_dragon_1.gd" id="1_nerpa"]
+[ext_resource type="Texture2D" uid="uid://dpvi6taxk2gm8" path="res://enemy/dragon/Dragon_sprite_sheet_noback.png" id="1_rhlno"]
+[ext_resource type="Script" uid="uid://cbk6a3ej5ich5" path="res://health.gd" id="2_health"]
+[ext_resource type="Script" uid="uid://p7d2gn51ofet" path="res://enemy_health_bar.gd" id="3_health_bar"]
+[ext_resource type="Texture2D" uid="uid://b05g6mn48on4w" path="res://healthbar/rpg (3).png" id="4_healthbar_texture"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nerpa"]
+atlas = ExtResource("1_rhlno")
+region = Rect2(0, 0, 62, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2k26c"]
+atlas = ExtResource("1_rhlno")
+region = Rect2(62, 0, 62, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bd6po"]
+atlas = ExtResource("1_rhlno")
+region = Rect2(124, 0, 62, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_606ff"]
+atlas = ExtResource("1_rhlno")
+region = Rect2(186, 0, 62, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_muho2"]
+atlas = ExtResource("1_rhlno")
+region = Rect2(248, 0, 62, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y1ufa"]
+atlas = ExtResource("1_rhlno")
+region = Rect2(310, 0, 62, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xc7an"]
+atlas = ExtResource("1_rhlno")
+region = Rect2(372, 0, 62, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mn4mk"]
+atlas = ExtResource("1_rhlno")
+region = Rect2(434, 0, 62, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1pcwg"]
+atlas = ExtResource("1_rhlno")
+region = Rect2(496, 0, 62, 66)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ifow5"]
+animations = [{
+"frames": [{
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_nerpa")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_2k26c")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_bd6po")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_606ff")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_muho2")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_y1ufa")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_xc7an")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_mn4mk")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_1pcwg")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 17.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wvhbo"]
+radius = 10.198039
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rhlno"]
+radius = 291.0017
+
+[sub_resource type="AtlasTexture" id="HealthBarRed"]
+atlas = ExtResource("4_healthbar_texture")
+region = Rect2(30, 84, 50, 1.4)
+
+[sub_resource type="AtlasTexture" id="HealthBarGreen"]
+atlas = ExtResource("4_healthbar_texture")
+region = Rect2(30, 92, 50, 1.4)
+
+[node name="enemyDragon1" type="CharacterBody2D" unique_id=1729784884 groups=["enemy_monster"]]
+script = ExtResource("1_nerpa")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1746753968]
+position = Vector2(0, 4.7683716e-07)
+scale = Vector2(0.7096774, 0.7348485)
+sprite_frames = SubResource("SpriteFrames_ifow5")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1256026131]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_wvhbo")
+
+[node name="Sight" type="Area2D" parent="." unique_id=1944945558]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sight" unique_id=576576337]
+shape = SubResource("CircleShape2D_rhlno")
+
+[node name="Health" type="Node" parent="." unique_id=1729784885]
+script = ExtResource("2_health")
+
+[node name="HealthBar" type="TextureProgressBar" parent="." unique_id=1729784886 groups=["enemy_monster"]]
+z_index = 1
+offset_left = -33.0
+offset_top = -26.0
+offset_right = 33.0
+offset_bottom = -19.0
+value = 100.0
+texture_under = SubResource("HealthBarRed")
+texture_progress = SubResource("HealthBarGreen")
+script = ExtResource("3_health_bar")
+
+[connection signal="body_entered" from="Sight" to="." method="_on_sight_body_entered"]
+[connection signal="body_exited" from="Sight" to="." method="_on_sight_body_exited"]

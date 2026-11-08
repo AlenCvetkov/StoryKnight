@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://sh7ah66jo1x"]
+
+[ext_resource type="Script" uid="uid://cffrp7wvnmr3w" path="res://enemy_snake.gd" id="1_cw8a0"]
+[ext_resource type="Texture2D" uid="uid://d3yrmuvmoi4sa" path="res://enemy/enemySnake/Snake_idle.png" id="1_xjolq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cw8a0"]
+atlas = ExtResource("1_xjolq")
+region = Rect2(0, 30, 48, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_onowu"]
+atlas = ExtResource("1_xjolq")
+region = Rect2(48, 30, 48, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8opge"]
+atlas = ExtResource("1_xjolq")
+region = Rect2(96, 30, 48, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wtemq"]
+atlas = ExtResource("1_xjolq")
+region = Rect2(144, 30, 48, 18)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ifow5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cw8a0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_onowu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8opge")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wtemq")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 7.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wvhbo"]
+size = Vector2(22, 6.4999847)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wvhbo"]
+radius = 34.0
+
+[node name="enemySnake" type="CharacterBody2D" unique_id=1683623538]
+script = ExtResource("1_cw8a0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=143383794]
+position = Vector2(8, -6)
+scale = Vector2(0.8958333, 1.0555555)
+sprite_frames = SubResource("SpriteFrames_ifow5")
+animation = &"idle"
+autoplay = "idle"
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1199894503]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_wvhbo")
+
+[node name="Sight" type="Area2D" parent="." unique_id=1673479731]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sight" unique_id=1473157383]
+shape = SubResource("CircleShape2D_wvhbo")
+
+[connection signal="body_entered" from="Sight" to="." method="_on_sight_body_entered"]
+[connection signal="body_exited" from="Sight" to="." method="_on_sight_body_exited"]

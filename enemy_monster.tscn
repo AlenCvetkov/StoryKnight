@@ -1,0 +1,157 @@
+[gd_scene format=3 uid="uid://rdc4v67d58xo"]
+
+[ext_resource type="Texture2D" uid="uid://qokei1hcgg7y" path="res://enemy/enemyMonster/attack01.png" id="1_m0qi5"]
+[ext_resource type="Texture2D" uid="uid://dod3xysffg6up" path="res://enemy/enemyMonster/attack02.png" id="2_tyc0e"]
+[ext_resource type="Texture2D" uid="uid://c1o6naye32gac" path="res://enemy/enemyMonster/attack03.png" id="3_dpecc"]
+[ext_resource type="Texture2D" uid="uid://cu6xb8ub7b3wa" path="res://enemy/enemyMonster/attack04.png" id="4_icuot"]
+[ext_resource type="Texture2D" uid="uid://cu3i6f7sqcxoq" path="res://enemy/enemyMonster/attack05.png" id="5_prvb5"]
+[ext_resource type="Texture2D" uid="uid://can8dwhn2w246" path="res://enemy/enemyMonster/attack06.png" id="6_ckqlv"]
+[ext_resource type="Texture2D" uid="uid://1tdpo2t88t51" path="res://enemy/enemyMonster/idle01.png" id="7_xonp0"]
+[ext_resource type="Texture2D" uid="uid://b3hu2gpnepi3y" path="res://enemy/enemyMonster/idle02.png" id="8_7t0gc"]
+[ext_resource type="Texture2D" uid="uid://od7x87vtrqvp" path="res://enemy/enemyMonster/hit01.png" id="8_ckqlv"]
+[ext_resource type="Texture2D" uid="uid://bxatk32c85flq" path="res://enemy/enemyMonster/idle03.png" id="9_glq4i"]
+[ext_resource type="Texture2D" uid="uid://cbwm5j3nln2wx" path="res://enemy/enemyMonster/hit02.png" id="9_xonp0"]
+[ext_resource type="Texture2D" uid="uid://dvccwhojntkty" path="res://enemy/enemyMonster/hit03.png" id="10_7t0gc"]
+[ext_resource type="Texture2D" uid="uid://bupnr5xioh0at" path="res://enemy/enemyMonster/idle04.png" id="10_cpwd6"]
+[ext_resource type="Texture2D" uid="uid://b3ieu7bovothg" path="res://enemy/enemyMonster/idle05.png" id="11_6ihy0"]
+[ext_resource type="Texture2D" uid="uid://c6w3cjx5ms2jg" path="res://enemy/enemyMonster/idle09.png" id="12_0kpcr"]
+[ext_resource type="Texture2D" uid="uid://b6xar2aqnos2w" path="res://enemy/enemyMonster/idle07.png" id="13_07udq"]
+[ext_resource type="Texture2D" uid="uid://cql0s8w61ik74" path="res://enemy/enemyMonster/idle06.png" id="14_o2p8l"]
+[ext_resource type="Texture2D" uid="uid://cvgr2r356cxlb" path="res://enemy/enemyMonster/idle08.png" id="15_kjqp2"]
+[ext_resource type="Script" uid="uid://cbk6a3ej5ich5" path="res://health.gd" id="20_glq4i"]
+[ext_resource type="Script" uid="uid://dym3fwtitrn55" path="res://enemy_health_ui.gd" id="21_7t0gc"]
+[ext_resource type="Texture2D" uid="uid://p1lyn6yjwjtv" path="res://hearts/Pixel Heart Sprite Sheet 16x16.png" id="22_glq4i"]
+[ext_resource type="Script" uid="uid://crjcckei3afts" path="res://enemy_monster.gd" id="23_enemy"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wvhbo"]
+animations = [{
+"frames": [{
+"duration": 0.8,
+"texture": ExtResource("1_m0qi5")
+}, {
+"duration": 1.6,
+"texture": ExtResource("2_tyc0e")
+}, {
+"duration": 0.8,
+"texture": ExtResource("3_dpecc")
+}, {
+"duration": 0.8,
+"texture": ExtResource("4_icuot")
+}, {
+"duration": 0.8,
+"texture": ExtResource("5_prvb5")
+}, {
+"duration": 0.8,
+"texture": ExtResource("6_ckqlv")
+}],
+"loop": 1,
+"name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 2.3,
+"texture": ExtResource("8_ckqlv")
+}, {
+"duration": 1.7,
+"texture": ExtResource("9_xonp0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_7t0gc")
+}],
+"loop": 0,
+"name": &"die",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_xonp0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_7t0gc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_6ihy0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_glq4i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_cpwd6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_0kpcr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_07udq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_o2p8l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_kjqp2")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wvhbo"]
+size = Vector2(14, 45)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wvhbo"]
+radius = 83.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ckqlv"]
+atlas = ExtResource("22_glq4i")
+region = Rect2(0, 0, 16.310196, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_half"]
+atlas = ExtResource("22_glq4i")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xonp0"]
+atlas = ExtResource("22_glq4i")
+region = Rect2(31.634777, 0, 16.365223, 16)
+
+[node name="enemyMonster" type="CharacterBody2D" unique_id=436527319 groups=["enemy_monster"]]
+script = ExtResource("23_enemy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1132782676]
+position = Vector2(8, -2)
+scale = Vector2(0.75, 0.84375)
+sprite_frames = SubResource("SpriteFrames_wvhbo")
+animation = &"die"
+autoplay = "idle"
+
+[node name="Health" type="Node" parent="." unique_id=1538778800]
+script = ExtResource("20_glq4i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1631919648]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_wvhbo")
+
+[node name="Sight" type="Area2D" parent="." unique_id=1859898711]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sight" unique_id=269930207]
+position = Vector2(-1, 0)
+shape = SubResource("CircleShape2D_wvhbo")
+
+[node name="HealthHearts" type="Node2D" parent="." unique_id=63283189]
+position = Vector2(0, -32)
+script = ExtResource("21_7t0gc")
+full_heart = SubResource("AtlasTexture_ckqlv")
+half_heart = SubResource("AtlasTexture_half")
+empty_heart = SubResource("AtlasTexture_xonp0")
+
+[node name="Heart1" type="Sprite2D" parent="HealthHearts" unique_id=725908591]
+position = Vector2(-5, 7)
+scale = Vector2(0.5, 0.49999997)
+texture = SubResource("AtlasTexture_ckqlv")
+
+[node name="Heart2" type="Sprite2D" parent="HealthHearts" unique_id=651212339]
+position = Vector2(6, 6.9999995)
+scale = Vector2(0.484375, 0.50000006)
+texture = SubResource("AtlasTexture_ckqlv")
+
+[connection signal="body_entered" from="Sight" to="." method="_on_sight_body_entered"]
+[connection signal="body_exited" from="Sight" to="." method="_on_sight_body_exited"]

@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://dckx72rc8b2ml"]
+
+[ext_resource type="Texture2D" uid="uid://dcnpywmm08lfu" path="res://traps/spikes/long_metal_spike_01.png" id="1_0kex2"]
+[ext_resource type="Script" uid="uid://derhex5e22vvk" path="res://spikes_1.gd" id="1_lnvp5"]
+[ext_resource type="Texture2D" uid="uid://braaprkdco50n" path="res://traps/spikes/long_metal_spike_02.png" id="2_lnvp5"]
+[ext_resource type="Texture2D" uid="uid://cse2dibsl4stu" path="res://traps/spikes/long_metal_spike_03.png" id="3_3ojx2"]
+[ext_resource type="Texture2D" uid="uid://cm0d80lf4xk38" path="res://traps/spikes/long_metal_spike_04.png" id="4_q2s43"]
+[ext_resource type="Script" uid="uid://qo6f264ijt0y" path="res://spikes_2.gd" id="6_q2s43"]
+[ext_resource type="Script" uid="uid://cjb8su24angl0" path="res://spikes_3.gd" id="7_6adht"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lnvp5"]
+animations = [{
+"frames": [{
+"duration": 27.0,
+"texture": ExtResource("1_0kex2")
+}, {
+"duration": 5.0,
+"texture": ExtResource("2_lnvp5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_3ojx2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_q2s43")
+}],
+"loop": 1,
+"name": &"move",
+"speed": 9.0
+}]
+
+[node name="Node" type="Node2D" unique_id=979627908]
+
+[node name="spikes1" type="Area2D" parent="." unique_id=1585012249]
+position = Vector2(0, 2)
+script = ExtResource("1_lnvp5")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="spikes1" unique_id=1013130815]
+position = Vector2(-1972.0001, -157.99998)
+scale = Vector2(1.4064765, 0.41241926)
+polygon = PackedVector2Array(1399.2415, 414.62662, 1402.0854, 349.15924, 1405.6404, 414.62662)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="spikes1" unique_id=1203124951]
+position = Vector2(0, 1)
+scale = Vector2(0.34925318, 0.23864226)
+sprite_frames = SubResource("SpriteFrames_lnvp5")
+animation = &"move"
+autoplay = "move"
+frame_progress = 0.32949284
+
+[node name="spikes2" type="Area2D" parent="." unique_id=35696192]
+position = Vector2(-47, -23)
+rotation = 3.1573007
+script = ExtResource("6_q2s43")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="spikes2" unique_id=88206331]
+position = Vector2(1.5199184e-06, 4.7683716e-07)
+scale = Vector2(0.34925318, 0.23864226)
+sprite_frames = SubResource("SpriteFrames_lnvp5")
+animation = &"move"
+autoplay = "move"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="spikes2" unique_id=881451366]
+polygon = PackedVector2Array(-7, 9, 7, 9, 0, -13)
+
+[node name="spikes3" type="Area2D" parent="." unique_id=116349889]
+position = Vector2(143, 3)
+script = ExtResource("7_6adht")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="spikes3" unique_id=583357752]
+position = Vector2(0, 1)
+scale = Vector2(0.34925318, 0.23864226)
+sprite_frames = SubResource("SpriteFrames_lnvp5")
+animation = &"move"
+autoplay = "move"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="spikes3" unique_id=637963429]
+polygon = PackedVector2Array(-6, 9, 6, 9, 0, -13)
+
+[node name="spikes4" type="Area2D" parent="." unique_id=1142030010]
+position = Vector2(63, -22)
+rotation = 3.1415927
+script = ExtResource("7_6adht")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="spikes4" unique_id=1164886484]
+position = Vector2(0, 1)
+scale = Vector2(0.34925318, 0.23864226)
+sprite_frames = SubResource("SpriteFrames_lnvp5")
+animation = &"move"
+autoplay = "move"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="spikes4" unique_id=1924167022]
+polygon = PackedVector2Array(-6, 9, 6, 9, 0, -13)
+
+[connection signal="body_entered" from="spikes1" to="spikes1" method="_on_body_entered"]
+[connection signal="body_exited" from="spikes1" to="spikes1" method="_on_body_exited"]
+[connection signal="body_entered" from="spikes2" to="spikes2" method="_on_body_entered"]
+[connection signal="body_exited" from="spikes2" to="spikes2" method="_on_body_exited"]
+[connection signal="body_entered" from="spikes3" to="spikes3" method="_on_body_entered"]
+[connection signal="body_exited" from="spikes3" to="spikes3" method="_on_body_exited"]
+[connection signal="body_entered" from="spikes4" to="spikes4" method="_on_body_entered"]
+[connection signal="body_exited" from="spikes4" to="spikes4" method="_on_body_exited"]

@@ -1,0 +1,128 @@
+[gd_scene format=3 uid="uid://b70dli0jeruw"]
+
+[ext_resource type="Script" uid="uid://clxhg02udr82v" path="res://enemy_dragon_2.gd" id="1_2si06"]
+[ext_resource type="Texture2D" uid="uid://dpvi6taxk2gm8" path="res://enemy/dragon/Dragon_sprite_sheet_noback.png" id="1_tikru"]
+[ext_resource type="Script" uid="uid://cbk6a3ej5ich5" path="res://health.gd" id="3_843mr"]
+[ext_resource type="Texture2D" uid="uid://b05g6mn48on4w" path="res://healthbar/rpg (3).png" id="4_mcxhr"]
+[ext_resource type="Script" uid="uid://p7d2gn51ofet" path="res://enemy_health_bar.gd" id="5_okkba"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2si06"]
+atlas = ExtResource("1_tikru")
+region = Rect2(0, 0, 62, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_843mr"]
+atlas = ExtResource("1_tikru")
+region = Rect2(62, 0, 62, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dd5bc"]
+atlas = ExtResource("1_tikru")
+region = Rect2(124, 0, 62, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mcxhr"]
+atlas = ExtResource("1_tikru")
+region = Rect2(186, 0, 62, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_okkba"]
+atlas = ExtResource("1_tikru")
+region = Rect2(248, 0, 62, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ufrsy"]
+atlas = ExtResource("1_tikru")
+region = Rect2(310, 0, 62, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_audcd"]
+atlas = ExtResource("1_tikru")
+region = Rect2(372, 0, 62, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wkef3"]
+atlas = ExtResource("1_tikru")
+region = Rect2(434, 0, 62, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r4s8c"]
+atlas = ExtResource("1_tikru")
+region = Rect2(496, 0, 62, 66)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wvhbo"]
+animations = [{
+"frames": [{
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_2si06")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_843mr")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_dd5bc")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_mcxhr")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_okkba")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_ufrsy")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_audcd")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_wkef3")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_r4s8c")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 17.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wvhbo"]
+radius = 11.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rhlno"]
+radius = 288.00696
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aa3l2"]
+atlas = ExtResource("4_mcxhr")
+region = Rect2(30, 84, 50, 1.4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fxqf5"]
+atlas = ExtResource("4_mcxhr")
+region = Rect2(30, 92, 50, 1.4)
+
+[node name="enemyDragon2" type="CharacterBody2D" unique_id=465433365 groups=["enemy_monster"]]
+script = ExtResource("1_2si06")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=442699215]
+position = Vector2(0, -2.3841858e-07)
+scale = Vector2(0.6532258, 0.6666667)
+sprite_frames = SubResource("SpriteFrames_wvhbo")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1664574691]
+shape = SubResource("CircleShape2D_wvhbo")
+
+[node name="Sight" type="Area2D" parent="." unique_id=1485975602]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sight" unique_id=715329789]
+shape = SubResource("CircleShape2D_rhlno")
+
+[node name="Health" type="Node" parent="." unique_id=38649831]
+script = ExtResource("3_843mr")
+max_health = 50
+
+[node name="HealthBar" type="TextureProgressBar" parent="." unique_id=1869097626 groups=["enemy_monster"]]
+z_index = 1
+offset_left = -33.0
+offset_top = -26.0
+offset_right = 33.0
+offset_bottom = -19.0
+value = 100.0
+texture_under = SubResource("AtlasTexture_aa3l2")
+texture_progress = SubResource("AtlasTexture_fxqf5")
+script = ExtResource("5_okkba")
+
+[connection signal="body_entered" from="Sight" to="." method="_on_sight_body_entered"]
+[connection signal="body_exited" from="Sight" to="." method="_on_sight_body_exited"]
