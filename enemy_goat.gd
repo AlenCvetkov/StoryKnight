@@ -4,6 +4,10 @@ extends CharacterBody2D
 @export var gravity: float = 980.0
 @export var knockback_duration: float = 0.15
 @export var knockback_friction: float = 1500.0
+@export var attack_damage: int = 10
+@export var attack_interval: float = 3.0
+@export var golden_key_scene: PackedScene
+var attack_timer: float = 0.6
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
@@ -50,6 +54,12 @@ func _physics_process(delta: float) -> void:
 		knockback_velocity_x = move_toward(knockback_velocity_x, 0.0, knockback_friction * delta)
 	elif player_in_attack_range:
 		velocity.x = 0.0
+		attack_timer -= delta
+
+		if attack_timer <= 0.0:
+			_play_animation("attack")
+			_damage_player()
+			attack_timer = attack_interval
 	elif target_player != null and is_instance_valid(target_player):
 		var direction := global_position.direction_to(target_player.global_position).x
 		velocity.x = direction * speed
@@ -92,8 +102,8 @@ func _on_attack_area_body_entered(body: Node2D) -> void:
 		return
 	target_player = body
 	player_in_attack_range = true
+	attack_timer = 0.0
 	velocity.x = 0.0
-	_play_animation("attack")
 
 func _on_attack_area_body_exited(body: Node2D) -> void:
 	if is_dead or not body.is_in_group("player"):
@@ -103,6 +113,14 @@ func _on_attack_area_body_exited(body: Node2D) -> void:
 		_play_animation("run")
 	else:
 		_play_animation("idle")
+
+func _damage_player() -> void:
+	if target_player == null or not is_instance_valid(target_player):
+		return
+
+	var player_health = target_player.get_node_or_null("Health")
+	if player_health != null:
+		player_health.call("take_damage", attack_damage)
 
 func _on_health_died() -> void:
 	is_dead = true
@@ -115,4 +133,13 @@ func _on_health_died() -> void:
 	$AttackArea/CollisionShape2D.set_deferred("disabled", true)
 	$CollisionShape2D.set_deferred("disabled", true)
 	await animated_sprite_2d.animation_finished
+
+	if golden_key_scene != null:
+		var dropped_key := golden_key_scene.instantiate() as Area2D
+		if dropped_key != null:
+			get_parent().add_child(dropped_key)
+			dropped_key.global_position = global_position
+	else:
+			push_error("На Minotaur-от не му е доделена сцената golden_key.tscn.")
+
 	queue_free()

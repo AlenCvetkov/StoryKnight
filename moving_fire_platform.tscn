@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://coihn83nwo4wc"]
+
+[ext_resource type="Texture2D" uid="uid://dbgceuyt8ltjo" path="res://ground.png" id="1_ground"]
+[ext_resource type="Script" uid="uid://b5a4tfytlkcon" path="res://moving_fire_platform.gd" id="2_script"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_platform"]
+size = Vector2(48, 16)
+
+[node name="MovingFirePlatform" type="AnimatableBody2D" unique_id=824179463]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("2_script")
+
+[node name="BoxLeft" type="Sprite2D" parent="." unique_id=668384943]
+position = Vector2(-16, 0)
+texture = ExtResource("1_ground")
+
+[node name="BoxMiddle" type="Sprite2D" parent="." unique_id=1186893294]
+texture = ExtResource("1_ground")
+
+[node name="BoxRight" type="Sprite2D" parent="." unique_id=378247874]
+position = Vector2(16, 0)
+texture = ExtResource("1_ground")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=189807565]
+shape = SubResource("RectangleShape2D_platform")

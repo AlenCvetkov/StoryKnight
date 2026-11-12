@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var speed = 150
+@export var speed = 180
 @export var jump_velocity = -400
 var is_attacking: bool = false
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -9,9 +9,12 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var hitbox: Area2D = $Hitbox
 
 var hitbox_offset: Vector2
+var spaw_position: Vector2 
 
 func _ready() -> void:
 	hitbox_offset = hitbox.position
+	spaw_position = global_position
+	$Health.died.connect(_on_player_died)
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("attack") and not is_attacking:
@@ -41,6 +44,15 @@ func process_movement(delta):
 
 func process_animation():
 	var direction = Input.get_axis("left", "right")
+	if velocity.y < 0.0 and (not is_on_floor() or Input.is_action_just_pressed("jump")):
+		if animated_sprite.animation != &"jump_start":
+			animated_sprite.play("jump_start")
+		return
+	if not is_on_floor():
+		var air_animation: StringName = &"jump_fall"
+		if animated_sprite.animation != air_animation:
+			animated_sprite.play(air_animation)
+		return
 	
 	if direction != 0:
 		animated_sprite.play("run")
@@ -57,9 +69,17 @@ func _update_hitbox_offset() -> void:
 	else:
 		hitbox.position = Vector2(x, y)
 
-func attack():
+func attack() -> void:
 	is_attacking = true
-	animated_sprite.play("attack")
+	var attack_animations: Array[StringName] = [&"attack", &"attack2"]
+	var chosen_attack: StringName = attack_animations.pick_random()
+
+	if not animated_sprite.sprite_frames.has_animation(chosen_attack):
+		push_error("Не постои анимацијата: " + String(chosen_attack))
+		is_attacking = false
+		return
+
+	animated_sprite.play(chosen_attack)
 	
 	# Чекаме мал дел од секундата (додека се отвора замавот од анимацијата)
 	await get_tree().create_timer(0.1).timeout
@@ -79,7 +99,18 @@ func attack():
 	await animated_sprite.animation_finished
 	is_attacking = false
 	
-# Можеш слободно да ја избришеш или да ја оставиш оваа функција, 
-# но со горниов код проверка преку overlapping bodies секој удар ќе се регистрира сигурно!
-func _on_hitbox_body_entered(body: Node2D) -> void:
-	pass
+func _on_player_died() -> void:
+	set_physics_process(false)
+	velocity = Vector2.ZERO
+	
+	animated_sprite.play("dead")
+	await animated_sprite.animation_finished
+	
+	global_position = spaw_position
+	var player_health = $Health
+	player_health.current_health = player_health.max_health
+	player_health.health_changed.emit(player_health.current_health)
+	
+	animated_sprite.play("idle")
+	set_physics_process(true)
+	

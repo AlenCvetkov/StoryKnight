@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://bt7nxeedgna3x"]
+
+[ext_resource type="Script" uid="uid://b11fnqnl2h1ss" path="res://main_menu.gd" id="1_06t4h"]
+
+[node name="Control" type="Control" unique_id=389017544]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_06t4h")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=115168791]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=577681922]
+layout_mode = 2
+
+[node name="StartButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=504798064]
+layout_mode = 2
+custom_minimum_size = Vector2(240, 64)
+theme_override_font_sizes/font_size = 28
+text = "Start
+"
+
+[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=551966717]
+layout_mode = 2
+custom_minimum_size = Vector2(240, 64)
+theme_override_font_sizes/font_size = 28
+text = "Quit
+"

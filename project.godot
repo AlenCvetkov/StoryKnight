@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="KnightStory"
+run/main_scene="uid://bt7nxeedgna3x"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GameState="*uid://dblrjjyx08us0"
 
 [display]
 

@@ -2,6 +2,26 @@
 
 [ext_resource type="Script" uid="uid://cffrp7wvnmr3w" path="res://enemy_snake.gd" id="1_cw8a0"]
 [ext_resource type="Texture2D" uid="uid://d3yrmuvmoi4sa" path="res://enemy/enemySnake/Snake_idle.png" id="1_xjolq"]
+[ext_resource type="Texture2D" uid="uid://e2qpxciwshav" path="res://enemy/enemySnake/Snake_death.png" id="2_8opge"]
+[ext_resource type="Script" uid="uid://blxhdtuch10wk" path="res://node.gd" id="3_onowu"]
+[ext_resource type="Script" uid="uid://6c12hscd6ep8" path="res://texture_progress_bar.gd" id="4_wtemq"]
+[ext_resource type="Texture2D" uid="uid://b05g6mn48on4w" path="res://healthbar/rpg (3).png" id="4_xq86h"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xq86h"]
+atlas = ExtResource("2_8opge")
+region = Rect2(12, 0, 45, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tekyn"]
+atlas = ExtResource("2_8opge")
+region = Rect2(57, 0, 45, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tfgsw"]
+atlas = ExtResource("2_8opge")
+region = Rect2(102, 0, 45, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wpwrj"]
+atlas = ExtResource("2_8opge")
+region = Rect2(147, 0, 45, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cw8a0"]
 atlas = ExtResource("1_xjolq")
@@ -21,6 +41,23 @@ region = Rect2(144, 30, 48, 18)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ifow5"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xq86h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tekyn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tfgsw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wpwrj")
+}],
+"loop": 0,
+"name": &"die",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_cw8a0")
@@ -43,27 +80,48 @@ animations = [{
 size = Vector2(22, 6.4999847)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wvhbo"]
-radius = 34.0
+radius = 63.03174
 
-[node name="enemySnake" type="CharacterBody2D" unique_id=1683623538]
+[sub_resource type="AtlasTexture" id="AtlasTexture_mkte6"]
+atlas = ExtResource("4_xq86h")
+region = Rect2(41.198, 85.866, 30, 2)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_svwmk"]
+atlas = ExtResource("4_xq86h")
+region = Rect2(40.203, 92.523, 30, 2)
+
+[node name="enemySnake" type="CharacterBody2D" unique_id=1683623538 groups=["enemy_monster"]]
+collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_cw8a0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=143383794]
-position = Vector2(8, -6)
+position = Vector2(0, -5.2)
 scale = Vector2(0.8958333, 1.0555555)
 sprite_frames = SubResource("SpriteFrames_ifow5")
-animation = &"idle"
+animation = &"die"
 autoplay = "idle"
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1199894503]
-position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_wvhbo")
 
 [node name="Sight" type="Area2D" parent="." unique_id=1673479731]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sight" unique_id=1473157383]
 shape = SubResource("CircleShape2D_wvhbo")
+
+[node name="HealthBar" type="TextureProgressBar" parent="." unique_id=550380345]
+offset_left = -14.0
+offset_top = -12.0
+offset_right = 36.0
+offset_bottom = -6.0
+texture_under = SubResource("AtlasTexture_mkte6")
+texture_progress = SubResource("AtlasTexture_svwmk")
+script = ExtResource("4_wtemq")
+
+[node name="Health" type="Node" parent="." unique_id=2101234469]
+script = ExtResource("3_onowu")
 
 [connection signal="body_entered" from="Sight" to="." method="_on_sight_body_entered"]
 [connection signal="body_exited" from="Sight" to="." method="_on_sight_body_exited"]

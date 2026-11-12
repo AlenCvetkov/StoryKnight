@@ -40,7 +40,7 @@ region = Rect2(224, 0, 32, 32)
 [sub_resource type="SpriteFrames" id="SpriteFrames_ifow5"]
 animations = [{
 "frames": [{
-"duration": 2.7,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_y1oib")
 }],
 "loop": 0,
@@ -103,6 +103,7 @@ shape = SubResource("CircleShape2D_ifow5")
 
 [node name="Health" type="Node" parent="." unique_id=113425406]
 script = ExtResource("3_ra6gt")
+max_health = 60
 
 [node name="HealthBar" type="TextureProgressBar" parent="." unique_id=1046685173 groups=["enemy_monster"]]
 z_index = 1

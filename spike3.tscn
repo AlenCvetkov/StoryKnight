@@ -11,7 +11,7 @@
 [sub_resource type="SpriteFrames" id="SpriteFrames_lnvp5"]
 animations = [{
 "frames": [{
-"duration": 27.0,
+"duration": 12.0,
 "texture": ExtResource("1_0kex2")
 }, {
 "duration": 5.0,
@@ -20,7 +20,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("3_3ojx2")
 }, {
-"duration": 1.0,
+"duration": 3.5,
 "texture": ExtResource("4_q2s43")
 }],
 "loop": 1,
@@ -45,7 +45,7 @@ scale = Vector2(0.34925318, 0.23864226)
 sprite_frames = SubResource("SpriteFrames_lnvp5")
 animation = &"move"
 autoplay = "move"
-frame_progress = 0.32949284
+frame_progress = 0.8511737
 
 [node name="spikes2" type="Area2D" parent="." unique_id=35696192]
 position = Vector2(-47, -23)
@@ -91,6 +91,36 @@ autoplay = "move"
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="spikes4" unique_id=1924167022]
 polygon = PackedVector2Array(-6, 9, 6, 9, 0, -13)
 
+[node name="spikes5" type="Area2D" parent="." unique_id=1634270495]
+position = Vector2(-388, -52)
+rotation = 4.712389
+script = ExtResource("7_6adht")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="spikes5" unique_id=882934824]
+position = Vector2(0, -2.7345097)
+scale = Vector2(0.34925318, 0.30303034)
+sprite_frames = SubResource("SpriteFrames_lnvp5")
+animation = &"move"
+autoplay = "move"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="spikes5" unique_id=729367233]
+polygon = PackedVector2Array(-6, 9, 6, 9, 0, -21)
+
+[node name="spikes6" type="Area2D" parent="." unique_id=141737688]
+position = Vector2(-388, -29)
+rotation = 4.712389
+script = ExtResource("7_6adht")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="spikes6" unique_id=319036231]
+position = Vector2(0, -3.2132945)
+scale = Vector2(0.34925318, 0.31128526)
+sprite_frames = SubResource("SpriteFrames_lnvp5")
+animation = &"move"
+autoplay = "move"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="spikes6" unique_id=1457701788]
+polygon = PackedVector2Array(-6, 9, 6, 9, -1.9073486e-06, -23)
+
 [connection signal="body_entered" from="spikes1" to="spikes1" method="_on_body_entered"]
 [connection signal="body_exited" from="spikes1" to="spikes1" method="_on_body_exited"]
 [connection signal="body_entered" from="spikes2" to="spikes2" method="_on_body_entered"]
@@ -99,3 +129,7 @@ polygon = PackedVector2Array(-6, 9, 6, 9, 0, -13)
 [connection signal="body_exited" from="spikes3" to="spikes3" method="_on_body_exited"]
 [connection signal="body_entered" from="spikes4" to="spikes4" method="_on_body_entered"]
 [connection signal="body_exited" from="spikes4" to="spikes4" method="_on_body_exited"]
+[connection signal="body_entered" from="spikes5" to="spikes5" method="_on_body_entered"]
+[connection signal="body_exited" from="spikes5" to="spikes5" method="_on_body_exited"]
+[connection signal="body_entered" from="spikes6" to="spikes6" method="_on_body_entered"]
+[connection signal="body_exited" from="spikes6" to="spikes6" method="_on_body_exited"]

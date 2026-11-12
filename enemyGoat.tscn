@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b3hbl8oncrerq" path="res://enemy/enemyMinotaur/Minotaur - Sprite Sheet.png" id="1_dc51h"]
 [ext_resource type="Script" uid="uid://b5n4aguuhk0sj" path="res://enemy_goat.gd" id="1_dge26"]
+[ext_resource type="PackedScene" uid="uid://hw5oavk3nj5d" path="res://golden_key.tscn" id="2_hq1lj"]
 [ext_resource type="Script" uid="uid://cbk6a3ej5ich5" path="res://health.gd" id="3_xil8g"]
 [ext_resource type="Texture2D" uid="uid://b05g6mn48on4w" path="res://healthbar/rpg (3).png" id="4_qm76p"]
 [ext_resource type="Script" uid="uid://p7d2gn51ofet" path="res://enemy_health_bar.gd" id="5_hq1lj"]
@@ -148,7 +149,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_uu5bi")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"attack",
 "speed": 21.0
 }, {
@@ -240,20 +241,21 @@ atlas = ExtResource("4_qm76p")
 region = Rect2(40.203, 92.523, 50, 2)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ifow5"]
-radius = 40.04997
+radius = 28.071337
 
 [node name="enemyMinotaur" type="CharacterBody2D" unique_id=1235983064 groups=["enemy_monster"]]
+collision_layer = 2
 collision_mask = 4
+wall_min_slide_angle = 0.6894051
 script = ExtResource("1_dge26")
+golden_key_scene = ExtResource("2_hq1lj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2113269392]
 position = Vector2(4, 1.5)
 scale = Vector2(1.5663887, 1.5145196)
 sprite_frames = SubResource("SpriteFrames_wvhbo")
-animation = &"attack"
+animation = &"idle"
 autoplay = "idle"
-frame = 3
-frame_progress = 0.34067968
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1596909893]
 position = Vector2(1, 0)
